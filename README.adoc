@@ -4,7 +4,7 @@
 [NOTE]
 ====
 * Github URL : _GIT url_
-* NOM 1 : _NOM1, Prénom1, no_étudiant1_
+* NOM 1 : _SMAHI, Abdeldjalil, 22205250_
 * NOM 2 : _NOM2, Prénom2, no_étudiant2_
 ====
 
