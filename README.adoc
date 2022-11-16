@@ -5,7 +5,7 @@
 ====
 * Github URL : _GIT url_
 * NOM 1 : _SMAHI, Abdeldjalil, 22205250_
-* NOM 2 : _AMRANE, Younes2, 21921438_
+* NOM 2 : _AMRANE, Younes, 21921438_
 ====
 
 L'objet de ce mini-projet est de développer un jeu d'exploration de donjon de type https://fr.wikipedia.org/wiki/Rogue-like[Rogue-like].
