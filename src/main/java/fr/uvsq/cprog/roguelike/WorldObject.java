@@ -10,4 +10,33 @@ public class WorldObject {
         this.y = y;
         this.asciiChar = asciiChar;
     }
+
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public String getAsciiChar() {
+        return asciiChar;
+    }
+
+    public void setAsciiChar(String asciiChar) {
+        this.asciiChar = asciiChar;
+    }
+
+    @Override
+    public String toString() {
+        return getAsciiChar() ;
+    }
+
 }
