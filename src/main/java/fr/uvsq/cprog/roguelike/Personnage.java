@@ -2,7 +2,7 @@ package fr.uvsq.cprog.roguelike;
 
 import org.fusesource.jansi.Ansi.Color;
 
-public class Personnage extends WorldObject {
+public abstract class Personnage extends WorldObject {
 
   /**
    * Constructeur de {@code WorldObject}.
@@ -15,4 +15,6 @@ public class Personnage extends WorldObject {
   public Personnage(int x, int y, String asciiChar, Color color) {
     super(x, y, asciiChar, color);
   }
+
+  public abstract void canMoveTo(int dx, int dy);
 }
