@@ -1,10 +1,12 @@
 package fr.uvsq.cprog.roguelike;
 
+import org.fusesource.jansi.Ansi.Color;
+
 public class Weapon extends WorldObject{
     private TypeWeapon type;
 
     public Weapon(int x, int y, TypeWeapon type) {
-        super(x, y, type.getAsciiChar());
+        super(x, y, type.getAsciiChar(), Color.WHITE);
         this.type = type;
     }
 
