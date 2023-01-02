@@ -13,10 +13,8 @@ public class Player extends Personnage {
   /**
    * Constructeur de {@code Personnage}.
    *
-   * @param x         Coordonnée x du personnage dans le monde.
-   * @param y         Coordonnée y du personnage dans le monde.
-   * @param asciiChar Caractère ASCII représentant le personnage dans le monde.
-   * @param color     Couleur du personnage dans le monde.
+   * @param x Coordonnée x du personnage dans le monde.
+   * @param y Coordonnée y du personnage dans le monde.
    */
   public Player(int x, int y) {
     super(x, y, " @ ", Color.CYAN);
@@ -80,13 +78,26 @@ public class Player extends Personnage {
   }
 
 
-
-
   public int getScore() {
     return score;
   }
 
   public void setScore(int score) {
     this.score = score;
+  }
+
+  public void pickUpWeapon(Weapon weapon, World world) {
+    if (this.weapon == null) {
+      this.weapon = weapon;
+      world.removeObject(weapon);  // ! --> .
+    } else { // j'ai une arme deja
+      Weapon tempWeapon = weapon;
+      world.removeObject(weapon); // je le rends sol ! --> . // remove from arraylist also // add . to list of comp
+      this.weapon.setX(tempWeapon.getX());
+      this.weapon.setY(tempWeapon.getY());
+      world.addWeapon(this.weapon); // add mon ancienne arme to arraylist of weapons
+      world.setObject(this.weapon);
+      this.weapon = tempWeapon;
+    }
   }
 }
