@@ -133,4 +133,37 @@ public class Game {
     }
   }
 
+
+
+  public Player getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(Player player) {
+    this.player = player;
+  }
+
+  public World getWorld() {
+    return world;
+  }
+
+  public void setWorld(World world) {
+    this.world = world;
+  }
+
+  public int getLevel() {
+    return level;
+  }
+
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
+  public boolean isFinished() {
+    return isFinished;
+  }
+
+  public void setFinished(boolean finished) {
+    isFinished = finished;
+  }
 }
