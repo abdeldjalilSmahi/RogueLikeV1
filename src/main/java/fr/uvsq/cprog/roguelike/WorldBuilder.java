@@ -154,4 +154,32 @@ public class WorldBuilder {
     world.addWorldComponent(worldComponent);
     return this;
   }
+
+  /**
+   * Ajoute des monstres au monde.
+   *
+   * @return L'instance courante de {@code WorldBuilder}.
+   */
+
+  public WorldBuilder addMonsters() {
+    int nbreMonster = level;
+    ;
+    int i = 0;
+    while (i < nbreMonster) {
+
+      int x;
+      int y;
+      do {
+        x = new Random().nextInt(xBounds) + 1;
+        y = new Random().nextInt(this.world.getWIDTH() - 10) + 10;
+      } while (!(world.getObject(x, y).getAsciiChar()
+          .equals(WorldComponentsType.SOL.getAsciiChar())));
+      world.removeWorldComponent((WorldComponent) world.getObject(x, y));
+      Monster monster = new Monster(x, y);
+      world.setObject(monster);
+      world.addMonster(monster);
+      i++;
+    }
+    return this;
+  }
 }
