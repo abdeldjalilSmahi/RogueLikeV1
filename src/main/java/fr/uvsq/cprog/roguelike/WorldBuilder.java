@@ -96,6 +96,48 @@ public class WorldBuilder {
     return this;
   }
 
+  /**
+   * Ajoute des murs aléatoirement sur la carte de jeu.
+   *
+   * @return L'instance de {@code WorldBuilder} courante.
+   */
 
+  public WorldBuilder addRandomWalls() {
+    for (int i = 1; i < this.world.getHEIGHT() - 1; i++) {
+      for (int j = 1; j < this.world.getWIDTH() - 2; j++) {
+        double proba = new Random().nextDouble();
+        if (j == 2) {
+          continue;
+        } else if (world.getObject(i, j) instanceof WorldComponent) {
+          if (((WorldComponent) world.getObject(i, j))
+              .getType().equals(WorldComponentsType.SOL)) {
+            if (j % 2 != 0) {
+              if (proba < 0.5) {
+                world.removeWorldComponent((WorldComponent) world.getObject(i, j));
+                WorldComponent worldComponent = new WorldComponent(i, j,
+                    WorldComponentsType.OBSTACLE, Color.YELLOW);
+                world.addWorldComponent(worldComponent);
+                world.setObject(worldComponent);
+              }
+            } else {
+              if (proba < 0.1) {
+                world.removeWorldComponent((WorldComponent) world.getObject(i, j));
+                WorldComponent worldComponent = new WorldComponent(i, j,
+                    WorldComponentsType.OBSTACLE, Color.YELLOW);
+                world.addWorldComponent(worldComponent);
+                world.setObject(worldComponent);
+              }
+
+            }
+          }
+
+
+        }
+
+      }
+    }
+
+    return this;
+  }
 
 }
