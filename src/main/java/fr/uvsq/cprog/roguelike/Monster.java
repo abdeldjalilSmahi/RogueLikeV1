@@ -18,8 +18,8 @@ public class Monster extends Personnage {
    */
   public Monster(int x, int y) {
     super(x, y, " $ ", Color.MAGENTA);
-    this.health = 50 ;
-    this.alive = true ;
+    this.health = 50;
+    this.alive = true;
   }
 
   public int getHealth() {
@@ -44,6 +44,30 @@ public class Monster extends Personnage {
 
   @Override
   public boolean canMoveTo(int dx, int dy, World world) {
-    return true ;
+    int newX = this.getX() + dx;
+    int newY = this.getY() + dy;
+    if (newX == 0 || newX == world.getHEIGHT() - 1 || newY == 0 || newY == world.getWIDTH() - 1) {
+      return false;
+    }
+    if (newX < 0 || newX > world.getHEIGHT() - 1 || newY < 0 || newY > world.getWIDTH() - 1) {
+      return false;
+    }
+    WorldObject destination = world.getObject(newX, newY);
+    if (destination instanceof Personnage) {
+
+      return false;
+    }
+    if (destination instanceof Weapon) {
+
+      return false;
+    } else if (destination instanceof WorldComponent) {
+      WorldComponent worldComponent = (WorldComponent) destination;
+      if (!(worldComponent.getAsciiChar().equals(WorldComponentsType.SOL.getAsciiChar()))) {
+
+        return false;
+      }
+
+    }
+    return true;
   }
 }
