@@ -7,6 +7,7 @@ public class Player extends Personnage{
   private int  health;
   private Weapon weapon;
   private boolean alive ;
+  private int score  ;
 
 
   /**
@@ -20,6 +21,7 @@ public class Player extends Personnage{
   public Player(int x, int y, String asciiChar, Color color) {
     super(x, y, " @ ", Color.CYAN);
     this.health = 100 ;
+    this.score = 0 ;
     this.weapon = null ;
     this.alive = true ;
   }
@@ -51,5 +53,13 @@ public class Player extends Personnage{
   @Override
   public void canMoveTo(int dx, int dy) {
 
+  }
+
+  public int getScore() {
+    return score;
+  }
+
+  public void setScore(int score) {
+    this.score = score;
   }
 }
