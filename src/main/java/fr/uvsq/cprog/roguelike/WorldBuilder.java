@@ -1,6 +1,9 @@
 package fr.uvsq.cprog.roguelike;
 
 
+import java.util.Random;
+import org.fusesource.jansi.Ansi.Color;
+
 /**
  * Classe construisant le {@link World}.
  *
@@ -35,6 +38,45 @@ public class WorldBuilder {
     this.world = new World(level);
     this.xBounds = this.world.getHEIGHT() - 2 - 1;
     this.yBounds = this.world.getWIDTH() - 2 - 1;
+  }
+
+  /**
+   * Ajoute des murs aux quatre côtés du monde.
+   *
+   * @return Le constructeur de monde avec les murs ajoutés.
+   */
+  public WorldBuilder addWalls() {
+    // Parcourir chaque ligne de la matrice
+    for (int j = 0; j < world.getWIDTH(); j++) {
+      // first line with obstalces
+      WorldComponent worldComponent = new WorldComponent(0, j,
+          WorldComponentsType.OBSTACLE, Color.RED);
+      world.setObject(worldComponent);
+      world.addWorldComponent(worldComponent);
+    }
+
+    for (int j = 0; j < world.getWIDTH(); j++) {
+      // =last line with obstalces
+      WorldComponent worldComponent = new WorldComponent(world.getHEIGHT() - 1,
+          j, WorldComponentsType.OBSTACLE, Color.RED);
+      world.setObject(worldComponent);
+      world.addWorldComponent(worldComponent);
+    }
+    //
+    for (int i = 1; i < world.getHEIGHT() - 1; i++) {
+      WorldComponent worldComponent = new WorldComponent(i, 0,
+          WorldComponentsType.OBSTACLE, Color.RED);
+      world.setObject(worldComponent);
+      world.addWorldComponent(worldComponent);
+    }
+    for (int i = 1; i < world.getHEIGHT() - 1; i++) {
+      WorldComponent worldComponent = new WorldComponent(i, world.getWIDTH()
+          - 1, WorldComponentsType.OBSTACLE, Color.RED);
+      world.setObject(worldComponent);
+      world.addWorldComponent(worldComponent);
+    }
+
+    return this;
   }
 
 
