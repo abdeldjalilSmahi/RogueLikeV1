@@ -1,9 +1,27 @@
 package fr.uvsq.cprog.roguelike;
 
+/**
+ * Classe définissant une commande permettant au joueur de ramasser une arme.
+ */
+
 public class PickUpWeaponCommand implements Command {
 
+  /**
+   * Le joueur qui doit rammasser l'arme.
+   */
+
   private Player player;
+  /**
+   * Le monde dans lequel se déplace le joueur.
+   */
   private World world;
+
+  /**
+   * Constructeur de la commande.
+   *
+   * @param player Le joueur qui doit ramasser l'arme.
+   * @param world  Le monde dans lequel se déroule la partie.
+   */
 
   public PickUpWeaponCommand(Player player, World world) {
     this.player = player;
@@ -21,6 +39,14 @@ public class PickUpWeaponCommand implements Command {
 
 
   }
+
+  /**
+   * Vérifie s'il y a une arme à proximité du joueur.
+   *
+   * @param player le joueur
+   * @param world  le monde
+   * @return true s'il y a une arme à proximité, false sinon
+   */
 
   public boolean isWeaponNearby(Player player, World world) {
     int x = player.getX();
@@ -50,6 +76,14 @@ public class PickUpWeaponCommand implements Command {
     // Aucune arme trouvée
     return false;
   }
+
+  /**
+   * Trouve une arme à proximité du joueur.
+   *
+   * @param player le joueur
+   * @param world  le monde
+   * @return l'arme trouvée, ou null si aucune arme n'a été trouvée
+   */
 
   public Weapon findNearbyWeapon(Player player, World world) {
     int x = player.getX();
