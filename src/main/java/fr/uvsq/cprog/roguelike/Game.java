@@ -111,15 +111,26 @@ public class Game {
         System.out.println("Voulez-vous rejouer ? O/N");
         String input1 = scanner.nextLine();
         if (input1.equals("O")) {
-          // Créer un nouveau jeu avec les mêmes paramètres (level et seed)
           Game newGame = new Game(this.level);
-          // Rejouer la partie
           newGame.runGame();
         } else {
-          // Quitter le jeu
           break;
         }
       }
     }
   }
+
+  /**
+   * Déplace les monstres et fait attaquer les monstres situés à côté du joueur.
+   */
+  public void moveMonsters() {
+    for (Monster monster : world.getMonsters()) {
+      monster.move(world);
+      if (((Math.abs(player.getX() - monster.getX()) == 1) && (player.getY() - monster.getY() == 0))
+          || (((Math.abs(player.getY() - monster.getY()) == 1) && (player.getX() - monster.getX() == 0)))) {
+        monster.attack(player);
+      }
+    }
+  }
+
 }
