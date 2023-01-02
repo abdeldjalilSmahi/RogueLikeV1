@@ -23,20 +23,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.8.2</version>
-    </dependency>
-
-
-    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->
     <dependency>
       <groupId>org.fusesource.jansi</groupId>
@@ -44,29 +30,77 @@
       <version>2.4.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.puppycrawl.tools</groupId>
+      <artifactId>checkstyle</artifactId>
+      <version>8.36</version>
+    </dependency>
+
+
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.jacoco</groupId>-->
+    <!--      <artifactId>jacoco-maven-plugin</artifactId>-->
+    <!--      <version>0.8.8</version>-->
+    <!--      <classifier>exec</classifier>-->
+    <!--    </dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.12.0</version>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
       <version>${log4j.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
       <version>${log4j.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>com.puppycrawl.tools</groupId>
-      <artifactId>checkstyle</artifactId>
-      <version>8.36</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
     <dependency>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-install-plugin</artifactId>
       <version>3.1.0</version>
     </dependency>
+    <dependency>
+
+      <groupId>house.jux</groupId>
+      <artifactId>prevayler4.transient</artifactId>
+      <version>2022.07.27</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.13.3</version>
+    </dependency>
+
+
+
+
+
   </dependencies>
 
   <build>
@@ -128,15 +162,6 @@
 
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-<!--  assembley    -->
-      <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.4.2</version>
         <configuration>
@@ -159,7 +184,6 @@
           </execution>
         </executions>
       </plugin>
-<!--      -->
       <!-- google checkstyle -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -207,22 +231,18 @@
       </plugin>
 
       <!--   JACOCO   -->
+
     </plugins>
   </build>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.2.0</version>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>checkstyle</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
+
+
+  <repositories>
+    <repository>
+      <id>clojars</id>
+      <name>Clojars</name>
+      <url>https://repo.clojars.org/</url>
+    </repository>
+  </repositories>
+
 </project>
+

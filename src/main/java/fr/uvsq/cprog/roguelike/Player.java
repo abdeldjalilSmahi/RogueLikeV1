@@ -22,7 +22,7 @@ public class Player extends Personnage {
    */
   public Player(int x, int y) {
     super(x, y, " @ ", Color.CYAN);
-    this.health = 10;
+    this.health = 100;
     this.score = 0;
     this.weapon = null;
     this.alive = true;

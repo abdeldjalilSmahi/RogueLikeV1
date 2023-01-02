@@ -59,12 +59,17 @@ https://github.com/jline/jline3[JLine] (gestion des saisies)
 
 == Manuel utilisateur
 > À compléter :
-> Dans quel univers se déroule le jeu ?
-> Quel est le but du jeu ?
-> Quelles sont les caractéristiques du PJ ?
-> Que peuvent faire les PNJ ?
-> Quelles interactions/commandes sont disponibles ?
-> Quelles évolutions peut-on envisager ?
+> Le jeu Rogue Like se déroule dans un univers imaginaire, dans lequel le joueur incarne un personnage (PJ) à travers un monde rempli de monstres et de dangers.
+
+> Le but du jeu est de parvenir à survivre le plus longtemps possible en évitant les attaques des monstres (PNJ) et en récoltant des armes et de l'équipement pour se défendre.
+
+> Le PJ a des caractéristiques telles que sa santé, son équipement et ses compétences, qui peuvent être améliorées au fil de la partie.
+
+> Les PNJ sont des monstres qui peuvent attaquer le PJ et le tuer s'il n'est pas suffisamment protégé ou s'il n'a pas assez de points de vie.
+
+> Les interactions/commandes disponibles pour le joueur sont : déplacement du PJ à l'aide des touches "z,q,d,s" respc haut, gauche, droite, bas.Le ramassage d'armes et d'équipement à proximité se fait en appuyant sur la touche 'e', utilisation d'armes pour attaquer les monstres en appuyant sur "a". Le joueur peut à tout moment quitter la partie en tappant "exit" et peut enregistrer son état.
+
+> Il est possible d'envisager plusieurs évolutions pour le jeu, comme l'ajout de nouveaux niveaux, de nouvelles armes et de nouveaux monstres, ainsi que l'ajout de quêtes et de challenges à accomplir.
 
 == Manuel technique
 === Compiler le projet
