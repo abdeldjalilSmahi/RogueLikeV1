@@ -159,7 +159,8 @@ public class Game {
           command = new AttackCommand(player, world);
           break;
         case "exit":
-          System.out.println("vous etes au point de quitter la parite, vous voulez sauvegareder la partie ? O/N");
+          System.out.println("vous etes au point de quitter la parite,"
+              + " vous voulez sauvegareder la partie ? O/N");
           input = scanner.nextLine();
           switch (input) {
             case "O":
@@ -167,6 +168,10 @@ public class Game {
               break;
             case "N":
               System.exit(0);
+              break;
+            default:
+              System.out.println("Commande erronée");
+              break;
           }
           break;
 
@@ -203,8 +208,10 @@ public class Game {
   public void moveMonsters() {
     for (Monster monster : world.getMonsters()) {
       monster.move(world);
-      if (((Math.abs(player.getX() - monster.getX()) == 1) && (player.getY() - monster.getY() == 0))
-          || (((Math.abs(player.getY() - monster.getY()) == 1) && (player.getX() - monster.getX() == 0)))) {
+      if (((Math.abs(player.getX() - monster.getX()) == 1)
+          && (player.getY() - monster.getY() == 0))
+          || (((Math.abs(player.getY() - monster.getY()) == 1)
+          && (player.getX() - monster.getX() == 0)))) {
         monster.attack(player);
       }
     }
@@ -213,10 +220,8 @@ public class Game {
   /**
    * Vérifie si le joueur a complété le niveau en tuant tous les monstres
    *
-   * <p>
    * et en atteignant la sortie. Si c'est le cas,
    *
-   * <p>
    * démarre le prochain niveau ou termine le jeu si c'était le dernier niveau.
    */
   public void checkLevelCompleted() {
@@ -227,7 +232,8 @@ public class Game {
         break;
       }
     }
-    if (allMonstersDead && this.player.getX() == world.getHEIGHT() - 2 && this.player.getY() == world.getWIDTH() - 2) {
+    if (allMonstersDead && this.player.getX() == world.getHEIGHT() - 2
+        && this.player.getY() == world.getWIDTH() - 2) {
       if (this.world.getLevel() == 3) {
         this.setFinished(true);
         System.out.println("Congratulations, you have won the game!");
@@ -276,7 +282,8 @@ public class Game {
     System.out.println("Current level: " + world.getLevel());
     System.out.println("Health: " + player.getHealth());
     if (player.getWeapon() != null) {
-      System.out.println("Current weapon: " + player.getWeapon().getType().getAsciiChar() + " Power: " + player.getWeapon().getDamage());
+      System.out.println("Current weapon: " + player.getWeapon().getType().getAsciiChar()
+          + " Power: " + player.getWeapon().getDamage());
     }
     for (Monster monster : world.getMonsters()) {
       System.out.println("Monster health : " + monster.getHealth());
