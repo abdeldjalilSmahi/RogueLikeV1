@@ -25,5 +25,5 @@ public abstract class Personnage extends WorldObject {
    * @param dx Déplacement sur l'axe x.
    * @param dy Déplacement sur l'axe y.
    */
-  public abstract void canMoveTo(int dx, int dy, World world);
+  public abstract boolean canMoveTo(int dx, int dy, World world);
 }

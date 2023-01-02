@@ -2,12 +2,12 @@ package fr.uvsq.cprog.roguelike;
 
 import org.fusesource.jansi.Ansi.Color;
 
-public class Player extends Personnage{
+public class Player extends Personnage {
 
-  private int  health;
+  private int health;
   private Weapon weapon;
-  private boolean alive ;
-  private int score  ;
+  private boolean alive;
+  private int score;
 
 
   /**
@@ -20,10 +20,10 @@ public class Player extends Personnage{
    */
   public Player(int x, int y, String asciiChar, Color color) {
     super(x, y, " @ ", Color.CYAN);
-    this.health = 100 ;
-    this.score = 0 ;
-    this.weapon = null ;
-    this.alive = true ;
+    this.health = 100;
+    this.score = 0;
+    this.weapon = null;
+    this.alive = true;
   }
 
   public int getHealth() {
@@ -51,11 +51,36 @@ public class Player extends Personnage{
   }
 
   @Override
-  public void canMoveTo(int dx, int dyn, World world) {
-
-
-
+  public boolean canMoveTo(int dx, int dy, World world) {
+    int newX = this.getX() + dx;
+    int newY = this.getY() + dy;
+    if (newX == 0 || newX == world.getHEIGHT() - 1 || newY == 0 || newY == world.getWIDTH() - 1) {
+      throw new IllegalArgumentException("Interdit de toucher les bordures du World");
+    }
+    if (newX < 0 || newX > world.getHEIGHT() - 1 || newY < 0 || newY > world.getWIDTH() - 1) {
+      throw new IndexOutOfBoundsException("tu essaie de dépasser les bordures ? Hein !! ");
+    }
+    WorldObject destination = world.getObject(newX, newY);
+    if (destination instanceof Monster) {
+      throw new IllegalArgumentException("Ouupps !! non tu peux pas, c'est un monstre !  il faut que tu l'attaque !");
+    }
+    if (destination instanceof Weapon) {
+      throw new IllegalArgumentException("Interdit de passer par une armer, il vaut mieux la ramasser");
+    }
+    if (destination instanceof WorldComponent) {
+      WorldComponent worldComponent = (WorldComponent) destination;
+      if (!(worldComponent.getType().equals(WorldComponentsType.SOL))) {
+        if (world.getMonsters().isEmpty() && (worldComponent.getType().equals(WorldComponentsType.SORTIE))) {
+          return true;
+        }
+        throw new IllegalArgumentException("Ouupps !! non tu peux pas, c'est un obstacle ! ");
+      }
+    }
+    return true;
   }
+
+
+
 
   public int getScore() {
     return score;
