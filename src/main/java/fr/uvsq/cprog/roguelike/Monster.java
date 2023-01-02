@@ -83,6 +83,13 @@ public class Monster extends Personnage {
       WorldObject object = world.getObject(this.getX(), newY);
       world.swapObjects(this, object);
     }
+  }
 
+  public void attack(Player player) {
+    player.setHealth(player.getHealth() - this.DAMAGE);
+    if (player.getHealth() <= 0) {
+      player.setHealth(0);
+      player.setAlive(false);
+    }
   }
 }
