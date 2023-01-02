@@ -3,6 +3,12 @@ package fr.uvsq.cprog.roguelike;
 import java.util.Random;
 import org.fusesource.jansi.Ansi.Color;
 
+/**
+ * Classe representant un monstre dans le monde du jeu.
+ *
+ * @author jalil
+ */
+
 public class Monster extends Personnage {
 
   private int health;
@@ -23,9 +29,20 @@ public class Monster extends Personnage {
     this.alive = true;
   }
 
+  /**
+   * Classe representant un monstre dans le monde du jeu.
+   *
+   * @author Charles-Etienne TABUSSE
+   */
   public int getHealth() {
     return health;
   }
+
+  /**
+   * Modifie la vie du monstre.
+   *
+   * @param health La nouvelle vie du monstre.
+   */
 
   public void setHealth(int health) {
     this.health = health;
@@ -34,18 +51,42 @@ public class Monster extends Personnage {
     }
   }
 
+  /**
+   * Retourne l'état de vie du monstre.
+   *
+   * @return {@code true} si le monstre est en vie, {@code false} sinon.
+   */
   public boolean isAlive() {
     return alive;
   }
 
+  /**
+   * Modifie l'état de vie du monstre.
+   *
+   * @param alive Le nouvel état de vie du monstre.
+   */
   public void setAlive(boolean alive) {
     this.alive = alive;
   }
+
+  /**
+   * Retourne les dégâts infligés par le monstre.
+   *
+   * @return Les dégâts infligés par le monstre.
+   */
 
   public int getDAMAGE() {
     return DAMAGE;
   }
 
+  /**
+   * Vérifie si le monstre peut se déplacer vers les coordonnées spécifiées.
+   *
+   * @param dx    Déplacement en x.
+   * @param dy    Déplacement en y.
+   * @param world Le monde dans lequel se déplace le monstre.
+   * @return Vrai si le monstre peut se déplacer, faux sinon.
+   */
   @Override
   public boolean canMoveTo(int dx, int dy, World world) {
     int newX = this.getX() + dx;
@@ -75,6 +116,12 @@ public class Monster extends Personnage {
     return true;
   }
 
+  /**
+   * Déplace le monstre de manière aléatoire dans le monde.
+   *
+   * @param world Le monde dans lequel se déplace le monstre.
+   */
+
   public void move(World world) {
     int dx = (new Random().nextInt(3)) - 1;
     int dy = dx == 0 ? (Math.random() < 0.5 ? -1 : 1) : 0;
@@ -85,6 +132,11 @@ public class Monster extends Personnage {
     }
   }
 
+  /**
+   * Attaque le joueur.
+   *
+   * @param player Le joueur à attaquer.
+   */
   public void attack(Player player) {
     player.setHealth(player.getHealth() - this.DAMAGE);
     if (player.getHealth() <= 0) {
