@@ -182,4 +182,31 @@ public class WorldBuilder {
     }
     return this;
   }
+
+  /**
+   * Ajoute des armes au monde.
+   *
+   * @return l'objet {@code WorldBuilder} avec les armes ajoutées.
+   */
+
+  public WorldBuilder addWeapons() {
+    TypeWeapon[] typeWeapons = TypeWeapon.values();
+    for (TypeWeapon typeWeapon : typeWeapons) {
+      int x;
+      int y;
+      do {
+        x = new Random().nextInt(xBounds) + 1;
+        y = new Random().nextInt(yBounds) + 1;
+      } while (!(world.getObject(x, y).getAsciiChar().equals(WorldComponentsType.SOL.getAsciiChar()))
+          && !(world.getObject(2, 1).getAsciiChar().equals(WorldComponentsType.SOL.getAsciiChar())));
+      world.removeWorldComponent((WorldComponent) world.getObject(x, y));
+      Weapon weapon = new Weapon(x, y, typeWeapon);
+      world.setObject(weapon);
+      world.addWeapon(weapon);
+
+    }
+    return this;
+
+  }
+
 }
