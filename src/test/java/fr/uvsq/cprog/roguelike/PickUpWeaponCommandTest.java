@@ -41,4 +41,13 @@ public class PickUpWeaponCommandTest {
     assertTrue(new PickUpWeaponCommand(player, world).isWeaponNearby(player, world));
 
   }
+
+  @Test
+  public void testNullWeapon(){
+    Player player = new Player(15, 13);
+    world = new WorldBuilder(1).addWalls().build();
+    world.setPlayer(player);
+    assertNull(new PickUpWeaponCommand(player, world).findNearbyWeapon(player,world));
+
+  }
 }
