@@ -219,7 +219,8 @@ public class World {
     }
 
     // Supprimer l'objet en mettant à sa place une instance de WorldComponent de type SOL
-    world[x][y] = new WorldComponent(x, y, WorldComponentsType.SOL, Color.WHITE);
+    world[x][y] = new WorldComponent(x, y, WorldComponentsType.SOL, Color.BLUE);
+    addWorldComponent((WorldComponent) world[x][y]);
   }
 
   /**
