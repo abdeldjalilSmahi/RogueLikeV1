@@ -79,5 +79,23 @@ public class WorldBuilder {
     return this;
   }
 
+  /**
+   * Ajoute des sols (WorldComponent de type SOL) dans le monde.
+   *
+   * @return Cet objet WorldBuilder, permettant de chaîner les appels de méthodes.
+   */
+  public WorldBuilder addSols() {
+    for (int i = 0; i < world.getWIDTH() - 1; i++) {
+      for (int j = 0; j < world.getHEIGHT() - 1; j++) {
+        WorldComponent worldComponent = new WorldComponent(i, j,
+            WorldComponentsType.SOL, Color.BLUE);
+        world.setObject(worldComponent);
+        world.addWorldComponent(worldComponent);
+      }
+    }
+    return this;
+  }
+
+
 
 }
