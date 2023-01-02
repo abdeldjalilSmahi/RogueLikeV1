@@ -18,6 +18,8 @@ public class Monster extends Personnage {
    */
   public Monster(int x, int y) {
     super(x, y, " $ ", Color.MAGENTA);
+    this.health = 50 ;
+    this.alive = true ;
   }
 
   public int getHealth() {
