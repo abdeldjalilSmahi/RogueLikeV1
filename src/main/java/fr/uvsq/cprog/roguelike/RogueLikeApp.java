@@ -1,46 +1,57 @@
 package fr.uvsq.cprog.roguelike;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-/**
- * Cette classe est le programme principal du projet.
- *
- * Elle est une implémentation du <em>design pattern</em>
- * <a href="https://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)">Singleton</a>.
- *
- * @author Stéphane Lopes
- * @version fév. 2018
- */
-public enum RogueLikeApp {
-    ROGUE_LIKE_APP;
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+import org.apache.logging.log4j.core.util.IOUtils;
 
-    private static final Logger logger = LogManager.getLogger(RogueLikeApp.class);
+public class RogueLikeApp {
+    public static void main(String[] args) throws InterruptedException {
 
-    /**
-     * Un exemple de méthode.
-     */
-    public String getGreetings() {
-        return "Hello !";
+
+        Scanner scanner = new Scanner(System.in);
+        Game game1 = null ;
+        File savedGameFile = new File("game.json");
+        if (savedGameFile.exists()) {
+            System.out.println("Il existe une partie déja sauvegardé, tu veux la continuer ? O/N");
+            String response = scanner.nextLine();
+            switch (response){
+
+                case "N":
+                    game1 = new Game(1);
+                    System.out.println("Une nouvelle partie vas démarrer");
+
+                    Thread.sleep(1000);
+                    Game.clearConsole();
+                    break;
+
+            }
+        }
+        else{
+            System.out.println("Une nouvelle partie va démarrer");
+            game1 = new Game(1);
+            Thread.sleep(1000);
+            Game.clearConsole();
+
+        }
+        game1.displayGame();
+
+        while (game1.getWorld().getLevel() <= 3) {
+            try{
+                game1.runGame();
+                game1.checkLevelCompleted();
+            }
+            catch(Exception e){
+                game1.displayGame();
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
-    /**
-     * Cette méthode est destinée à initialiser et lancer l'exécution du programme.
-     *
-     * @param args les paramètres de la ligne de commande du shell
-     */
-    public void run(String[] args) {
-        logger.trace("Début du programme");
-        System.out.println(getGreetings());
-        logger.trace("Fin du programme");
-    }
-
-    /**
-     * La méthode de classe <em>main</em> se contente de déléguer le lancement du programme à la méthode <em>run</em>.
-     *
-     * @param args les paramètres de la ligne de commande du shell
-     */
-    public static void main(String[] args) {
-        ROGUE_LIKE_APP.run(args);
-    }
 }
