@@ -140,4 +140,17 @@ public class World {
     world[x][y] = new WorldComponent(x, y, WorldComponentsType.SOL, Color.BLUE);
     addWorldComponent((WorldComponent) world[x][y]);
   }
+
+  public void swapObjects(WorldObject obj1, WorldObject obj2) {
+    int x1 = obj1.getX();
+    int y1 = obj1.getY();
+    int x2 = obj2.getX();
+    int y2 = obj2.getY();
+    world[x1][y1] = obj2;
+    obj2.setX(x1);
+    obj2.setY(y1);
+    world[x2][y2] = obj1;
+    obj1.setX(x2);
+    obj1.setY(y2);
+  }
 }
