@@ -189,13 +189,30 @@ public class Game {
 
       }
       if (!player.isAlive()) {
+        clearConsole();
         System.out.println("You have died. Game over.");
         System.out.println("Voulez-vous rejouer ? O/N");
         String input1 = scanner.nextLine();
         if (input1.equals("O")) {
-          Game newGame = new Game(this.level);
-          newGame.runGame();
+          // Créer un nouveau jeu avec les mêmes paramètres (level et seed)
+//          Game newGame = new Game(this.level);
+//          // Rejouer la partie
+//          newGame.runGame();
+          this.world = new WorldBuilder(level)
+              .addSols()
+              .addWalls()
+              .addRandomWalls()
+              .addMonsters()
+              .addWeapons()
+              .addPlayer()
+              .addOutput()
+              .build();
+          this.player = world.getPlayer();
+          this.isFinished = false;
+          clearConsole();
+          displayGame();
         } else {
+          // Quitter le jeu
           break;
         }
       }
