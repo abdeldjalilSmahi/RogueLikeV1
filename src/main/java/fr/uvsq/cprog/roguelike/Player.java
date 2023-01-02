@@ -48,6 +48,14 @@ public class Player extends Personnage {
     this.alive = alive;
   }
 
+  public int getScore() {
+    return score;
+  }
+
+  public void setScore(int score) {
+    this.score = score;
+  }
+
   @Override
   public boolean canMoveTo(int dx, int dy, World world) {
     int newX = this.getX() + dx;
@@ -65,8 +73,7 @@ public class Player extends Personnage {
     if (destination instanceof Weapon) {
       throw new IllegalArgumentException("Interdit de passer par une armer, il vaut mieux la ramasser");
     }
-    if (destination instanceof WorldComponent) {
-      WorldComponent worldComponent = (WorldComponent) destination;
+    if (destination instanceof WorldComponent worldComponent) {
       if (!(worldComponent.getType().equals(WorldComponentsType.SOL))) {
         if (world.getMonsters().isEmpty() && (worldComponent.getType().equals(WorldComponentsType.SORTIE))) {
           return true;
@@ -77,14 +84,14 @@ public class Player extends Personnage {
     return true;
   }
 
-
-  public int getScore() {
-    return score;
+  public void move(int dx, int dy, World world) {
+    if (canMoveTo(dx, dy, world)) {
+      int newX = getX() + dx;
+      int newY = getY() + dy;
+      world.swapObjects(this, world.getObject(newX, newY));
+    }
   }
 
-  public void setScore(int score) {
-    this.score = score;
-  }
 
   public void pickUpWeapon(Weapon weapon, World world) {
     if (this.weapon == null) {
@@ -98,6 +105,18 @@ public class Player extends Personnage {
       world.addWeapon(this.weapon); // add mon ancienne arme to arraylist of weapons
       world.setObject(this.weapon);
       this.weapon = tempWeapon;
+    }
+  }
+
+  public void attack(Monster monster, World world) {
+    if (weapon != null) {
+      monster.setHealth(monster.getHealth() - weapon.getDamage());
+      if (monster.getHealth() <= 0) {
+        world.removeObject(monster);
+        monster.setAlive(false);
+      }
+    } else {
+      System.out.println("Run away !!  you have no weapon! ");
     }
   }
 }
