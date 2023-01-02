@@ -37,6 +37,82 @@ public class Game {
   }
 
   /**
+   * Récupère le joueur du jeu.
+   *
+   * @return le joueur du jeu
+   */
+  public Player getPlayer() {
+    return player;
+  }
+
+  /**
+   * Modifie le joueur du jeu.
+   *
+   * @param player le nouveau joueur du jeu
+   */
+
+  public void setPlayer(Player player) {
+    this.player = player;
+  }
+
+  /**
+   * Récupère le monde du jeu.
+   *
+   * @return le monde du jeu
+   */
+
+  public World getWorld() {
+    return world;
+  }
+
+  /**
+   * Modifie le monde du jeu.
+   *
+   * @param world le nouveau monde du jeu
+   */
+  public void setWorld(World world) {
+    this.world = world;
+  }
+
+  /**
+   * Récupère le niveau du jeu.
+   *
+   * @return le niveau du jeu
+   */
+
+  public int getLevel() {
+    return level;
+  }
+
+  /**
+   * Modifie le niveau du jeu.
+   *
+   * @param level le nouveau niveau du jeu
+   */
+
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
+  /**
+   * Indique si le jeu est fini ou non.
+   *
+   * @return vrai si le jeu est fini, faux sinon
+   */
+  public boolean isFinished() {
+    return isFinished;
+  }
+
+  /**
+   * Modifie l'état de fin du jeu.
+   *
+   * @param finished vrai si le jeu est fini, faux sinon
+   */
+  public void setFinished(boolean finished) {
+    isFinished = finished;
+  }
+
+  /**
    * Méthode principale qui exécute la partie jusqu'à ce que le joueur meurt ou termine le niveau.
    */
   public void runGame() {
@@ -134,36 +210,4 @@ public class Game {
   }
 
 
-
-  public Player getPlayer() {
-    return player;
-  }
-
-  public void setPlayer(Player player) {
-    this.player = player;
-  }
-
-  public World getWorld() {
-    return world;
-  }
-
-  public void setWorld(World world) {
-    this.world = world;
-  }
-
-  public int getLevel() {
-    return level;
-  }
-
-  public void setLevel(int level) {
-    this.level = level;
-  }
-
-  public boolean isFinished() {
-    return isFinished;
-  }
-
-  public void setFinished(boolean finished) {
-    isFinished = finished;
-  }
 }
