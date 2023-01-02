@@ -1,6 +1,7 @@
 package fr.uvsq.cprog.roguelike;
 
 import java.util.ArrayList;
+import org.fusesource.jansi.Ansi.Color;
 
 public class World {
 
@@ -79,10 +80,64 @@ public class World {
   public void setPlayer(Player player) {
     this.player = player;
   }
-  public void addWorldComponent(WorldComponent worldComponent){
+
+  public void addWorldComponent(WorldComponent worldComponent) {
     this.worldComponents.add(worldComponent);
   }
-  public void removeWorldComponent(WorldComponent worldComponent){
+
+  public void removeWorldComponent(WorldComponent worldComponent) {
     this.worldComponents.remove(worldComponent);
+  }
+
+  public WorldObject getObject(int x, int y) {
+    return world[x][y];
+  }
+
+  public void setObject(WorldObject worldObject) {
+    // Vérifier d'abord si la position est valide
+    int x = worldObject.getX();
+    int y = worldObject.getY();
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {
+      throw new IllegalArgumentException("Object position is out of bounds");
+    }
+
+    // Supprimer l'objet existant à cette position s'il est remplie par une sol si non
+    if (getObject(x, y) == null) {
+      world[x][y] = worldObject;
+
+    }
+
+    world[x][y] = worldObject;
+
+  }
+
+  public void removeObject(WorldObject worldObject) {
+    // Vérifier d'abord si la position est vide
+    int x = worldObject.getX();
+    int y = worldObject.getY();
+    if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {
+      throw new IllegalArgumentException("Object position is out of bounds");
+    }
+    if (world[x][y] == null) {
+      throw new IllegalArgumentException("Object position is already empty");
+    }
+
+    // Vérifier ensuite si l'objet à cette position est le même que celui qui est passé en paramètre
+    if (!world[x][y].equals(worldObject)) {
+      throw new IllegalArgumentException("Object at position is different from the object being removed");
+    }
+
+    // Supprimer l'objet en remplaçant par un composant de type SOL (sol)
+    if (worldObject instanceof Monster) {
+      this.monsters.remove((Monster) worldObject);
+    }
+    if (worldObject instanceof WorldComponent) {
+      this.worldComponents.remove((WorldComponent) worldObject);
+    }
+    if (worldObject instanceof Weapon) {
+      this.weapons.remove((Weapon) worldObject);
+    }
+    world[x][y] = new WorldComponent(x, y, WorldComponentsType.SOL, Color.BLUE);
+    addWorldComponent((WorldComponent) world[x][y]);
   }
 }
