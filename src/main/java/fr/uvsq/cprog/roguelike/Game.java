@@ -209,5 +209,47 @@ public class Game {
     }
   }
 
-
+  /**
+   * Vérifie si le joueur a complété le niveau en tuant tous les monstres
+   *
+   * <p>
+   * et en atteignant la sortie. Si c'est le cas,
+   *
+   * <p>
+   * démarre le prochain niveau ou termine le jeu si c'était le dernier niveau.
+   */
+  public void checkLevelCompleted() {
+    boolean allMonstersDead = true;
+    for (Monster monster : world.getMonsters()) {
+      if (monster.isAlive()) {
+        allMonstersDead = false;
+        break;
+      }
+    }
+    if (allMonstersDead && this.player.getX() == world.getHEIGHT() - 2 && this.player.getY() == world.getWIDTH() - 2) {
+      if (this.world.getLevel() == 3) {
+        this.setFinished(true);
+        System.out.println("Congratulations, you have won the game!");
+        System.exit(0);
+      } else {
+        this.world.setLevel(this.world.getLevel() + 1);
+        this.world = new WorldBuilder(this.world.getLevel()).addSols()
+            .addWalls()
+            .addRandomWalls()
+            .addMonsters()
+            .addWeapons()
+            .addPlayer()
+            .addOutput()
+            .build();
+        this.player = this.world.getPlayer();
+        System.out.println("You have completed the level!");
+        System.out.println("Starting next level...");
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    }
+  }
 }
