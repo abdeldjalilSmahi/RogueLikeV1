@@ -4,6 +4,8 @@ import org.fusesource.jansi.Ansi.Color;
 
 /**
  * Classe qui définit le joueur.
+ *
+ * @author jalil
  */
 public class Player extends Personnage {
 
@@ -122,14 +124,17 @@ public class Player extends Personnage {
     }
     WorldObject destination = world.getObject(newX, newY);
     if (destination instanceof Monster) {
-      throw new IllegalArgumentException("Ouupps !! non tu peux pas, c'est un monstre !  il faut que tu l'attaque !");
+      throw new IllegalArgumentException("Ouupps !! non tu peux pas, c'est un monstre !"
+          + "  il faut que tu l'attaque !");
     }
     if (destination instanceof Weapon) {
-      throw new IllegalArgumentException("Interdit de passer par une armer, il vaut mieux la ramasser");
+      throw new IllegalArgumentException("Interdit de passer par une armer,"
+          + " il vaut mieux la ramasser");
     }
     if (destination instanceof WorldComponent worldComponent) {
       if (!(worldComponent.getType().equals(WorldComponentsType.SOL))) {
-        if (world.getMonsters().isEmpty() && (worldComponent.getType().equals(WorldComponentsType.SORTIE))) {
+        if (world.getMonsters().isEmpty()
+            && (worldComponent.getType().equals(WorldComponentsType.SORTIE))) {
           return true;
         }
         throw new IllegalArgumentException("Ouupps !! non tu peux pas, c'est un obstacle ! ");
@@ -168,7 +173,7 @@ public class Player extends Personnage {
       world.removeObject(weapon);  // ! --> .
     } else { // j'ai une arme deja
       Weapon tempWeapon = weapon;
-      world.removeObject(weapon); // je le rends sol ! --> . // remove from arraylist also // add . to list of comp
+      world.removeObject(weapon);
       this.weapon.setX(tempWeapon.getX());
       this.weapon.setY(tempWeapon.getY());
       world.addWeapon(this.weapon); // add mon ancienne arme to arraylist of weapons
