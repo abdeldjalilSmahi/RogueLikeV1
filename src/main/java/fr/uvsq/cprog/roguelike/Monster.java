@@ -4,6 +4,12 @@ import org.fusesource.jansi.Ansi.Color;
 
 public class Monster extends Personnage{
 
+  private int health;
+
+  private boolean alive ;
+
+  private final int DAMAGE = 5 ;
+
   /**
    * Constructeur de {@code Personnage}.
    *
@@ -14,6 +20,26 @@ public class Monster extends Personnage{
    */
   public Monster(int x, int y, String asciiChar, Color color) {
     super(x, y, asciiChar, color);
+  }
+
+  public int getHealth() {
+    return health;
+  }
+
+  public void setHealth(int health) {
+    this.health = health;
+  }
+
+  public boolean isAlive() {
+    return alive;
+  }
+
+  public void setAlive(boolean alive) {
+    this.alive = alive;
+  }
+
+  public int getDAMAGE() {
+    return DAMAGE;
   }
 
   @Override
