@@ -29,7 +29,7 @@ class MonsterTest {
 
     monster.attack(player);
 
-    assertEquals(95, player.getHealth());
+    assertEquals(90, player.getHealth());
   }
 
   @Test

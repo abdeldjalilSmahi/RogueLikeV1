@@ -194,10 +194,7 @@ public class Game {
         System.out.println("Voulez-vous rejouer ? O/N");
         String input1 = scanner.nextLine();
         if (input1.equals("O")) {
-          // Créer un nouveau jeu avec les mêmes paramètres (level et seed)
-//          Game newGame = new Game(this.level);
-//          // Rejouer la partie
-//          newGame.runGame();
+
           this.world = new WorldBuilder(level)
               .addSols()
               .addWalls()
@@ -209,6 +206,12 @@ public class Game {
               .build();
           this.player = world.getPlayer();
           this.isFinished = false;
+          System.out.println("Restarting the level...");
+          try {
+            Thread.sleep(1000);
+          } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+          }
           clearConsole();
           displayGame();
         } else {
@@ -236,9 +239,9 @@ public class Game {
 
   /**
    * Vérifie si le joueur a complété le niveau en tuant tous les monstres
-   *
+   * <p>
    * et en atteignant la sortie. Si c'est le cas,
-   *
+   * <p>
    * démarre le prochain niveau ou termine le jeu si c'était le dernier niveau.
    */
   public void checkLevelCompleted() {
@@ -281,9 +284,8 @@ public class Game {
    * Efface le contenu de la console.
    *
    * @throws IOException          Si une erreur d'entrée/sortie se produit
-   *
-   *lors de l'exécution de la commande.
-   *
+   *                              <p>
+   *                              lors de l'exécution de la commande.
    * @throws InterruptedException Si l'attente pour la fin de l'exécution de la commande est interrompue.
    */
   public static void clearConsole() {

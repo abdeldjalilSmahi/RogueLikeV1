@@ -15,7 +15,7 @@ public class Monster extends Personnage {
 
   private boolean alive;
 
-  private final int DAMAGE = 5;
+  private final int DAMAGE = 10;
 
   /**
    * Constructeur de {@code Personnage}.

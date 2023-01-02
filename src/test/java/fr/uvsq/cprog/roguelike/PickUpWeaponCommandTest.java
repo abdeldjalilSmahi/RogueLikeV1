@@ -1,6 +1,5 @@
 package fr.uvsq.cprog.roguelike;
 
-import org.fusesource.jansi.Ansi.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
