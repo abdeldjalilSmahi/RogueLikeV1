@@ -6,10 +6,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * Classe représentant la commande de sauvegarde de la partie.
+ */
+
 public class SaveCommand implements Command {
 
   private Game game;
 
+  /**
+   * Constructeur de la classe SaveCommand.
+   *
+   * @param game Objet Game à sauvegarder
+   */
   public SaveCommand(Game game) {
 
     this.game = game;
