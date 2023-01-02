@@ -81,14 +81,6 @@ public class World {
     this.player = player;
   }
 
-  public void addWorldComponent(WorldComponent worldComponent) {
-    this.worldComponents.add(worldComponent);
-  }
-
-  public void removeWorldComponent(WorldComponent worldComponent) {
-    this.worldComponents.remove(worldComponent);
-  }
-
   public WorldObject getObject(int x, int y) {
     return world[x][y];
   }
@@ -153,4 +145,22 @@ public class World {
     obj1.setX(x2);
     obj1.setY(y2);
   }
+
+  public void addMonster(Monster monster) {
+    this.monsters.add(monster);
+  }
+
+  public void addWeapon(Weapon weapon) {
+    this.weapons.add(weapon);
+  }
+
+  public void addWorldComponent(WorldComponent worldComponent) {
+    this.worldComponents.add(worldComponent);
+  }
+
+  public void removeWorldComponent(WorldComponent worldComponent) {
+    this.worldComponents.remove(worldComponent);
+  }
+
+
 }
