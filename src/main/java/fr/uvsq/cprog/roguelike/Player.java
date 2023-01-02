@@ -51,7 +51,9 @@ public class Player extends Personnage{
   }
 
   @Override
-  public void canMoveTo(int dx, int dy) {
+  public void canMoveTo(int dx, int dyn, World world) {
+
+
 
   }
 

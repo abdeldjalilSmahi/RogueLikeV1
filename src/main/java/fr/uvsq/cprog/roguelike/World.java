@@ -79,4 +79,10 @@ public class World {
   public void setPlayer(Player player) {
     this.player = player;
   }
+  public void addWorldComponent(WorldComponent worldComponent){
+    this.worldComponents.add(worldComponent);
+  }
+  public void removeWorldComponent(WorldComponent worldComponent){
+    this.worldComponents.remove(worldComponent);
+  }
 }
