@@ -1,6 +1,7 @@
 package fr.uvsq.cprog.roguelike;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -251,5 +252,36 @@ public class Game {
         }
       }
     }
+  }
+
+  /**
+   * Efface le contenu de la console.
+   *
+   * @throws IOException          Si une erreur d'entrée/sortie se produit lors de l'exécution de la commande.
+   * @throws InterruptedException Si l'attente pour la fin de l'exécution de la commande est interrompue.
+   */
+  public static void clearConsole() {
+    try {
+      new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    } catch (IOException | InterruptedException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  /**
+   * Affiche l'état actuel du jeu.
+   */
+  public void displayGame() {
+    world.display();
+    System.out.println("Current level: " + world.getLevel());
+    System.out.println("Health: " + player.getHealth());
+    if (player.getWeapon() != null) {
+      System.out.println("Current weapon: " + player.getWeapon().getType().getAsciiChar() + " Power: " + player.getWeapon().getDamage());
+    }
+    for (Monster monster : world.getMonsters()) {
+      System.out.println("Monster health : " + monster.getHealth());
+    }
+    System.out.println("Enter a command ('z'/'q'/'s'/'d' to move, 'a' to attack"
+        + ", 'e' to pick up weapon and 'exit' to exit the game):");
   }
 }
