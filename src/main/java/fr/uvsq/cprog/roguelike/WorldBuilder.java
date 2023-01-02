@@ -140,4 +140,18 @@ public class WorldBuilder {
     return this;
   }
 
+  /**
+   * Ajoute la sortie de la grille de jeu.
+   *
+   * @return L'instance actuelle de {@code WorldBuilder} pour permettre l'ajout en chaîne.
+   */
+  public WorldBuilder addOutput() {
+    WorldComponent worldComponent = new WorldComponent(this.world.getWIDTH() - 2,
+        this.world.getHEIGHT() - 2, WorldComponentsType.SORTIE, Color.GREEN);
+    world.removeWorldComponent((WorldComponent) world.getObject(this.world.getWIDTH() - 2,
+        this.world.getHEIGHT() - 2));
+    this.world.setObject(worldComponent);
+    world.addWorldComponent(worldComponent);
+    return this;
+  }
 }
