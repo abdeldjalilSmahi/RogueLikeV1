@@ -12,6 +12,13 @@ public class PickUpWeaponCommand implements Command {
 
   @Override
   public void execute() {
+    if (isWeaponNearby(player, world)) {
+      Weapon weapon = findNearbyWeapon(player, world);
+      if (weapon != null) {
+        player.pickUpWeapon(weapon, world);
+      }
+    }
+
 
   }
 
