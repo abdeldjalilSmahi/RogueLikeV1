@@ -71,10 +71,11 @@ public class Monster extends Personnage {
     }
     return true;
   }
-  public void move( World world) {
-    int dx = (new Random().nextInt(3) )- 1;
-    int dy = dx == 0 ? (Math.random() < 0.5 ? -1 : 1 ) : 0 ;
-    if (canMoveTo(dx , dy, world)) {
+
+  public void move(World world) {
+    int dx = (new Random().nextInt(3)) - 1;
+    int dy = dx == 0 ? (Math.random() < 0.5 ? -1 : 1) : 0;
+    if (canMoveTo(dx, dy, world)) {
       int newY = this.getY() + dy;
       WorldObject object = world.getObject(this.getX(), newY);
       world.swapObjects(this, object);
