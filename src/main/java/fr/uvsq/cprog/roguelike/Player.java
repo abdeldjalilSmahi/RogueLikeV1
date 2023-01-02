@@ -18,7 +18,7 @@ public class Player extends Personnage {
    * @param asciiChar Caractère ASCII représentant le personnage dans le monde.
    * @param color     Couleur du personnage dans le monde.
    */
-  public Player(int x, int y, String asciiChar, Color color) {
+  public Player(int x, int y) {
     super(x, y, " @ ", Color.CYAN);
     this.health = 100;
     this.score = 0;
