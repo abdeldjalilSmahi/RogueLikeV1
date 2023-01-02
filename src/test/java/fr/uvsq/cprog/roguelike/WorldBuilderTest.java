@@ -4,52 +4,66 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import fr.uvsq.cprog.roguelike.WorldComponent;
+import fr.uvsq.cprog.roguelike.WorldComponentsType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WorldBuilderTest {
+import fr.uvsq.cprog.roguelike.WorldBuilder;
+
+public class WorldBuilderTest {
 
   private WorldBuilder worldBuilder;
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     worldBuilder = new WorldBuilder(1);
   }
 
   @Test
-  void testReset() {
-    worldBuilder.reset(1);
-    assertNotNull(worldBuilder.build());
-    assertEquals(1, worldBuilder.build().getLevel());
-  }
-
-  @Test
-  void testAddWalls() {
+  public void testAddWalls() {
     worldBuilder.addWalls();
-    assertTrue(worldBuilder.build().getWorldComponents().size() >= 4);
+
+    // Vérifie que les coins de la matrice sont bien des obstacles
+    assertTrue(worldBuilder.build().getObject(0, 0) instanceof WorldComponent &&
+        ((WorldComponent) worldBuilder.build().getObject(0, 0)).getType().equals(WorldComponentsType.OBSTACLE));
+    assertTrue(worldBuilder.build().getObject(0, worldBuilder.build().getWIDTH() - 1) instanceof WorldComponent &&
+        ((WorldComponent) worldBuilder.build().getObject(0, worldBuilder.build().getWIDTH() - 1)).getType().equals(WorldComponentsType.OBSTACLE));
+    assertTrue(worldBuilder.build().getObject(worldBuilder.build().getHEIGHT() - 1, 0) instanceof WorldComponent &&
+        ((WorldComponent) worldBuilder.build().getObject(worldBuilder.build().getHEIGHT() - 1, 0)).getType().equals(WorldComponentsType.OBSTACLE));
+    assertTrue(worldBuilder.build().getObject(worldBuilder.build().getHEIGHT() - 1, worldBuilder.build().getWIDTH() - 1) instanceof WorldComponent &&
+        ((WorldComponent) worldBuilder.build().getObject(worldBuilder.build().getHEIGHT() - 1, worldBuilder.build().getWIDTH() - 1)).getType().equals(WorldComponentsType.OBSTACLE));
   }
 
   @Test
-  void testAddSols() {
-
+  public void testAddSols() {
     worldBuilder.addSols();
-    assertTrue(worldBuilder.build().getWorldComponents().size() >= 19*19);
+
+    // Vérifie que tous les éléments de la matrice sont bien des sols
+    for (int i = 0; i < worldBuilder.build().getWIDTH()-1; i++) {
+      for (int j = 0; j < worldBuilder.build().getHEIGHT()-1; j++) {
+        assertTrue((worldBuilder.build().getObject(i, j)) instanceof WorldComponent );
+      }
+    }
   }
 
   @Test
-  void testAddRandomWalls() {
-    worldBuilder.addSols().addRandomWalls();
-    assertTrue(worldBuilder.build().getWorldComponents().size() >= 4);
+  public void testAddRandomWalls() {
+    World world = worldBuilder.addSols().addWalls().addRandomWalls().build();
+
+    // Vérifie que certains éléments de la matrice sont bien des obstacles
+    boolean hasObstacle = false;
+    for (int i = 1; i < world.getHEIGHT()-1; i++) {
+      for (int j = 1; j < world.getWIDTH() - 1; j++) {
+        if (world.getObject(i, j) instanceof WorldComponent &&
+            ((WorldComponent) world.getObject(i, j)).getType().equals(WorldComponentsType.OBSTACLE)) {
+          hasObstacle = true;
+          break;
+        }
+      }
+    }
+    assertTrue(hasObstacle);
   }
-
-
-
-  @Test
-  void testAddRandomWeapons() {
-    worldBuilder.addSols().addWeapons();
-    assertTrue(worldBuilder.build().getWeapons().size() >= 1);
-  }
-
   @Test
   void testAddPlayer() {
     worldBuilder.addPlayer();
@@ -67,4 +81,21 @@ class WorldBuilderTest {
     assertNotNull(world.getPlayer());
   }
 
+
+  @Test
+  void testReset() {
+    worldBuilder.reset(1);
+    assertNotNull(worldBuilder.build());
+    assertEquals(1, worldBuilder.build().getLevel());
+  }
+
+
+
+
+
+  @Test
+  void testAddRandomWeapons() {
+    worldBuilder.addSols().addWeapons();
+    assertTrue(worldBuilder.build().getWeapons().size() >= 1);
+  }
 }

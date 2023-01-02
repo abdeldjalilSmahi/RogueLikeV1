@@ -263,7 +263,10 @@ public class Game {
   /**
    * Efface le contenu de la console.
    *
-   * @throws IOException          Si une erreur d'entrée/sortie se produit lors de l'exécution de la commande.
+   * @throws IOException          Si une erreur d'entrée/sortie se produit
+   *
+   *lors de l'exécution de la commande.
+   *
    * @throws InterruptedException Si l'attente pour la fin de l'exécution de la commande est interrompue.
    */
   public static void clearConsole() {
