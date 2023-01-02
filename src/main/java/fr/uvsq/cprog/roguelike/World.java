@@ -1,7 +1,10 @@
 package fr.uvsq.cprog.roguelike;
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.ArrayList;
 import org.fusesource.jansi.Ansi.Color;
+import org.fusesource.jansi.AnsiConsole;
 
 public class World {
 
@@ -160,6 +163,16 @@ public class World {
 
   public void removeWorldComponent(WorldComponent worldComponent) {
     this.worldComponents.remove(worldComponent);
+  }
+
+  public void display() {
+    AnsiConsole.systemInstall();
+    for (int i = 0; i < this.HEIGHT; i++) {
+      for (int j = 0; j < this.WIDTH; j++) {
+        System.out.print(ansi().fg(world[i][j].getColor()).a(world[i][j]).reset());
+      }
+      System.out.println();
+    }
   }
 
 
