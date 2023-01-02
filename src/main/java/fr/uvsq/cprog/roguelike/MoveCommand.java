@@ -16,6 +16,6 @@ public class MoveCommand implements Command {
 
   @Override
   public void execute() {
-
+    player.move( dx, dy, world);
   }
 }
