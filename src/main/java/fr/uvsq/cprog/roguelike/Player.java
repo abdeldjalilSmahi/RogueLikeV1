@@ -2,13 +2,15 @@ package fr.uvsq.cprog.roguelike;
 
 import org.fusesource.jansi.Ansi.Color;
 
+/**
+ * Classe qui définit le joueur.
+ */
 public class Player extends Personnage {
 
   private int health;
   private Weapon weapon;
   private boolean alive;
   private int score;
-
 
   /**
    * Constructeur de {@code Personnage}.
@@ -24,37 +26,86 @@ public class Player extends Personnage {
     this.alive = true;
   }
 
+  /**
+   * Retourne la vie du joueur.
+   *
+   * @return La vie du joueur.
+   */
   public int getHealth() {
     return health;
   }
 
+  /**
+   * Modifie la vie du joueur.
+   *
+   * @param health La nouvelle vie du joueur.
+   */
   public void setHealth(int health) {
     this.health = health;
   }
 
+  /**
+   * Retourne l'arme du joueur.
+   *
+   * @return L'arme du joueur.
+   */
   public Weapon getWeapon() {
     return weapon;
   }
 
+  /**
+   * Modifie l'arme du joueur.
+   *
+   * @param weapon La nouvelle arme du joueur.
+   */
   public void setWeapon(Weapon weapon) {
     this.weapon = weapon;
   }
 
+  /**
+   * Indique si le joueur est en vie.
+   *
+   * @return {@code true} si le joueur est en vie, {@code false} sinon.
+   */
   public boolean isAlive() {
     return alive;
   }
 
+  /**
+   * Modifie l'état de vie du joueur.
+   *
+   * @param alive Le nouvel état de vie du joueur.
+   */
   public void setAlive(boolean alive) {
     this.alive = alive;
   }
 
+  /**
+   * Retourne le score du joueur.
+   *
+   * @return Le score du joueur.
+   */
   public int getScore() {
     return score;
   }
 
+  /**
+   * Modifie le score du joueur.
+   *
+   * @param score Le nouveau score du joueur.
+   */
   public void setScore(int score) {
     this.score = score;
   }
+
+  /**
+   * Vérifie si le joueur peut se déplacer vers les coordonnées spécifiées.
+   *
+   * @param dx    Déplacement en x.
+   * @param dy    Déplacement en y.
+   * @param world Le monde dans lequel se déplace le joueur.
+   * @return Vrai si le joueur peut se déplacer, faux sinon.
+   */
 
   @Override
   public boolean canMoveTo(int dx, int dy, World world) {
@@ -84,6 +135,14 @@ public class Player extends Personnage {
     return true;
   }
 
+  /**
+   * Fait avancer le personnage dans la direction spécifiée.
+   *
+   * @param dx    La distance à parcourir en abscisse.
+   * @param dy    La distance à parcourir en ordonnée.
+   * @param world Le monde dans lequel le personnage se déplace.
+   */
+
   public void move(int dx, int dy, World world) {
     if (canMoveTo(dx, dy, world)) {
       int newX = getX() + dx;
@@ -91,6 +150,13 @@ public class Player extends Personnage {
       world.swapObjects(this, world.getObject(newX, newY));
     }
   }
+
+  /**
+   * Ramasse une arme.
+   *
+   * @param weapon L'arme à ramasser.
+   * @param world  Le monde dans lequel le personnage se trouve.
+   */
 
 
   public void pickUpWeapon(Weapon weapon, World world) {
@@ -107,6 +173,13 @@ public class Player extends Personnage {
       this.weapon = tempWeapon;
     }
   }
+
+  /**
+   * Attaque un monstre.
+   *
+   * @param monster Le monstre à attaquer.
+   * @param world   Le monde dans lequel se trouve le monstre.
+   */
 
   public void attack(Monster monster, World world) {
     if (weapon != null) {
