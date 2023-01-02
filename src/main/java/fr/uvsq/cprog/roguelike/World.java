@@ -213,9 +213,15 @@ public class World {
       throw new IllegalArgumentException("Object position is already empty");
     }
 
-    // Vérifier ensuite si l'objet à cette position est le même que celui qui est passé en paramètre
-    if (!world[x][y].equals(worldObject)) {
-      throw new IllegalArgumentException("Object at position is different from the object being removed");
+    // Supprimer l'objet en remplaçant par un composant de type SOL (sol)
+    if(worldObject instanceof Monster){
+      this.monsters.remove((Monster) worldObject);
+    }
+    if(worldObject instanceof WorldComponent){
+      this.worldComponents.remove((WorldComponent) worldObject);
+    }
+    if(worldObject instanceof Weapon){
+      this.weapons.remove((Weapon)worldObject);
     }
 
     // Supprimer l'objet en mettant à sa place une instance de WorldComponent de type SOL

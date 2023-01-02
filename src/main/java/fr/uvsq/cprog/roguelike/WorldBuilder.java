@@ -198,7 +198,7 @@ public class WorldBuilder {
         x = new Random().nextInt(xBounds) + 1;
         y = new Random().nextInt(yBounds) + 1;
       } while (!(world.getObject(x, y).getAsciiChar().equals(WorldComponentsType.SOL.getAsciiChar()))
-          && !(world.getObject(2, 1).getAsciiChar().equals(WorldComponentsType.SOL.getAsciiChar())));
+          && !(world.getObject(1, 2).getAsciiChar().equals(WorldComponentsType.SOL.getAsciiChar())));
       world.removeWorldComponent((WorldComponent) world.getObject(x, y));
       Weapon weapon = new Weapon(x, y, typeWeapon);
       world.setObject(weapon);
