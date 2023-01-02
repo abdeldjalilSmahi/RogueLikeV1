@@ -206,7 +206,28 @@ public class WorldBuilder {
 
     }
     return this;
+  }
 
+  /**
+   * Méthode qui ajoute un joueur à la carte du monde.
+   *
+   * @return L'objet WorldBuilder
+   */
+  public WorldBuilder addPlayer() {
+    Player player = new Player(1, 1);
+    world.removeWorldComponent((WorldComponent) world.getObject(1, 1));
+    this.world.setObject(player);
+    this.world.setPlayer(player);
+    return this;
+  }
+
+  /**
+   * Méthode qui construit l'objet World en cours de création.
+   *
+   * @return L'objet World créé.
+   */
+  public World build() {
+    return world;
   }
 
 }
