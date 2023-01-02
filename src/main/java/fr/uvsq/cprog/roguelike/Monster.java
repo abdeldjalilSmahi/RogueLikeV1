@@ -29,6 +29,9 @@ public class Monster extends Personnage {
 
   public void setHealth(int health) {
     this.health = health;
+    if (health <= 0) {
+      setAlive(false);
+    }
   }
 
   public boolean isAlive() {
