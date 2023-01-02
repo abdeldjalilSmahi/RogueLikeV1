@@ -67,9 +67,28 @@ https://github.com/jline/jline3[JLine] (gestion des saisies)
 
 > Les PNJ sont des monstres qui peuvent attaquer le PJ et le tuer s'il n'est pas suffisamment protégé ou s'il n'a pas assez de points de vie.
 
-> Les interactions/commandes disponibles pour le joueur sont : déplacement du PJ à l'aide des touches "z,q,d,s" respc haut, gauche, droite, bas.Le ramassage d'armes et d'équipement à proximité se fait en appuyant sur la touche 'e', utilisation d'armes pour attaquer les monstres en appuyant sur "a". Le joueur peut à tout moment quitter la partie en tappant "exit" et peut enregistrer son état.
+> Les interactions/commandes disponibles pour le joueur sont : déplacement du PJ, le ramassage d'armes et d'équipement à proximité, utilisation d'armes pour attaquer les monstres et le joueur peut à tout moment quitter la partie enregistrer son état.
 
 > Il est possible d'envisager plusieurs évolutions pour le jeu, comme l'ajout de nouveaux niveaux, de nouvelles armes et de nouveaux monstres, ainsi que l'ajout de quêtes et de challenges à accomplir.
+
+> Les commandes que l'utilisateur doit taper pour jouer :
+
+*  z + Entrer pour aller en haut.
+*  q + Entrer pour aller à gauche.
+*  d + Entrer  pour aller à droite.
+*	w + Entrer pour aller vers le bas.
+*	e + Entrer pour prendre une arme.
+*	exit +Entrer  pour quitter le jeu puis suivre des instructions.
+
+> Les différentes représentations sur la carte:
+
+* 	"@" représente le joueur.
+*	"$"  représente le ou les dragons sur la map.
+*	0 représente la sortie par laquelle il faut passer pour passer au niveau suivant.
+*	# représente les obstacles soit des murs à l'intérieur de la map ou ses bordures.
+*	? représente un Axe qui fait 10 de dommage.
+*	! représente une Bat qui fait 5 de dommage.
+*	P représente un Gun qui fait 15 de dommage.
 
 == Manuel technique
 === Compiler le projet
@@ -89,8 +108,31 @@ $ java -jar target/roguelike-1.0.jar
 ----
 
 > À compléter :
-> Comment consulter le rapport de couverture de code par les tests ?
-> Quelles bibliothèques ont été utilisées et pourquoi ?
+> Comment consulter le rapport de couverture de code par les tests : mvn jacoco:test report puis en allant au dossier target/site/jacoco on trouve un fichier web index.html .
+
+> Quelles bibliothèques ont été utilisées et pourquoi :
+
+* JUnit 5.9.1 pour faire les tests unitaires .
+* gson pour sérialiser l'objet Game afin d'enregistrer les parties sous format JSON.
+* Jansi pour gérer les couleurs affichée sur la console .
+
+
 > Quel est le rôle des différentes classes ?
+
+* WorldComponentsType : un enum qui stocke les différents types de composants qui peuvent apparaître dans le monde du jeu (par exemple, murs, sol, sortie).
+* WorldObject : une superclasse qui représente un objet générique dans le monde du jeu. Il a des attributs pour les coordonnées x et y de l'objet et le caractère ASCII, ainsi que des méthodes d'accès et de modification pour ces attributs.
+* WorldComponent : une sous-classe de WorldObject qui représente un type spécifique de composant dans le monde du jeu (par exemple, mur, sol). Il a un attribut WorldComponentsType pour stocker le type de composant qu'il représente.
+* TypeWeapon : un enum qui stocke les différents types d'armes qui peuvent apparaître dans le monde du jeu (par exemple, AXE, BAT, GUN).
+* Weapon : une sous-classe de WorldObject qui représente une arme dans le monde du jeu. Il a un attribut TypeWeapon pour stocker le type d'arme qu'il représente, ainsi que des attributs pour les dégâts et la portée de l'arme.
+* Personnage : une sous classe de WorldObject représente un OJ ou PNJ.
+* Player : une classe qui représente le personnage du joueur. Il a des attributs pour la santé du joueur, son arme actuelle et sa position actuelle dans le monde du jeu, ainsi que des méthodes d'accès et de modification pour ces attributs. Il a également des méthodes pour se déplacer, ramasser des armes et attaquer des monstres.
+* World : une classe qui représente le monde du jeu. Elle a un tableau 2D d'objets WorldObject pour stocker les objets dans le monde, ainsi que des méthodes pour ajouter et supprimer des objets du monde.
+* Game : une classe qui regroupe tout et fait fonctionner le jeu. Elle utilise le modèle de commande pour gérer les actions du joueur et le modèle de constructeur pour construire le monde du jeu. Elle a également une méthode pour afficher le monde du jeu sur la console.
+* Les classes command, qui gèrent le mouvement du joueur, le ramassage des armes,
+
 > Quels traitements sont réalisés pour gérer une commande saisie par l'utilisateur ? Donnez un exemple.
+    tout d'abord on vérifie si cette commande est valide, si c'est le cas ça dépend la valeur de son input, par exemple, si le joueur tape "z" c'est à dire qu'il veut faire un mouvement vers le haut, la commade Move s'execute en lui passant les attribut 1,0 et le world actuel, et le joueur. Une vérification des règles métiers du jeu se fait, on vérifie si le joueur peut bien bouger vers le haut s'il n'y a pas une arme ou un obstacle ou un monstre. Si c'est le cas on fait un swap entre le sol du haut et l'emplacement du joueur.
+
 > Quelles améliorations peut-on envisager ?
+
+Plusieurs améliorations peuvent etre envisagées, par exemple, on ajoutant quelques Armes, et que le joueur peut récolter de l'argent pour acheter une arme dès le démmarage du jeu, on ajoute un bouclier de Health pour qu'il puisse se soigner et en compliquant la diffuculté du jeu.
